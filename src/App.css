@@ -1,42 +1,57 @@
-#root {
-  max-width: 1280px;
+.enrollment-container {
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: 20px;
+  background-color: #757575;
+  font-family: Arial, sans-serif;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+fieldset {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: white;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+legend {
+  font-weight: bold;
+  color: #2c3e50;
+  padding: 0 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.grid-row {
+  display: grid;
+  gap: 15px;
+  margin-bottom: 15px;
 }
 
-.card {
-  padding: 2em;
+.four-cols { grid-template-columns: repeat(4, 1fr); }
+.three-cols { grid-template-columns: repeat(3, 1fr); }
+.two-cols { grid-template-columns: repeat(2, 1fr); }
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 0.85rem;
 }
 
-.read-the-docs {
-  color: #888;
+input:focus, select:focus {
+  outline: 2px solid #007bff; /* Visual Feedback required by instruction  */
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 15px;
+  background-color: #007bff;
+  color: rgb(71, 69, 69);
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Responsiveness for Mobile  */
+@media (max-width: 600px) {
+  .grid-row { grid-template-columns: 1fr !important; }
 }
