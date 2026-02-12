@@ -1,0 +1,80 @@
+.enrollment-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #757575;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background-color: white;
+  padding: 30px 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h2 {
+  margin: 0 0 10px 0;
+  color: #2c3e50;
+  font-size: 1.8rem;
+}
+
+header p {
+  margin: 0;
+  color: #555;
+  font-size: 1rem;
+}
+
+fieldset {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: white;
+}
+
+legend {
+  font-weight: bold;
+  color: #2c3e50;
+  padding: 0 10px;
+  margin-left: -10px;
+  display: block;
+}
+
+.grid-row {
+  display: grid;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.four-cols { grid-template-columns: repeat(4, 1fr); }
+.three-cols { grid-template-columns: repeat(3, 1fr); }
+.two-cols { grid-template-columns: repeat(2, 1fr); }
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 0.85rem;
+}
+
+input:focus, select:focus {
+  outline: 2px solid #007bff; /* Visual Feedback required by instruction  */
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 15px;
+  background-color: #007bff;
+  color: rgb(71, 69, 69);
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Responsiveness for Mobile  */
+@media (max-width: 600px) {
+  .grid-row { grid-template-columns: 1fr !important; }
+}
