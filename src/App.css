@@ -1,0 +1,156 @@
+.enrollment-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  margin: 0;
+  padding: 32px;
+  background-color: #b38404;
+  font-family: Arial, sans-serif;
+  overflow: auto;
+}
+
+fieldset {
+  border: 5px solid #000000;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: rgb(185, 184, 184);
+}
+
+legend {
+  font-weight: bold;
+  color: #000000;
+  padding: 0 10px;
+}
+
+.grid-row {
+  display: grid;
+  gap: 15px;
+  margin-bottom: 15px;
+  .landline-boxes input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  display: block;
+  margin-bottom: 5px;
+  font-size: 0.85rem;
+}
+
+input:focus, select:focus {
+  outline: 2px solid #000407; /* Visual Feedback required by instruction  */
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 15px;
+  background-color: #c7b301;
+  color: rgb(0, 0, 0);
+  border: 5px solid #000000;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Responsiveness for Mobile  */
+@media (max-width: 600px) {
+  .grid-row { grid-template-columns: 1fr !important; }
+}
+
+/* Ensure consistent box sizing and full-width inputs so grid columns align */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  color: #111;
+}
+
+/* Checkbox group layout inside input-group */
+.checkbox-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 6px 0 8px 0;
+}
+.checkbox-group label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95rem;
+}
+
+/* Landline boxes layout */
+.landline-boxes {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.landline-boxes input {
+  width: 140px;
+  max-width: 40%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+@media (max-width: 600px) {
+  .landline-boxes { flex-direction: column; }
+  .landline-boxes input { width: 100%; max-width: 100%; }
+}
+
+/* Personal Information: labels above inputs (stacked) */
+.enrollment-container fieldset:first-of-type .input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.enrollment-container fieldset:first-of-type .input-group label {
+  width: auto;
+  margin: 0;
+  text-align: left;
+  font-weight: 600;
+}
+.enrollment-container fieldset:first-of-type .input-group input,
+.enrollment-container fieldset:first-of-type .input-group select,
+.enrollment-container fieldset:first-of-type .input-group textarea {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* Arrange the four name fields in a single row */
+.enrollment-container fieldset:first-of-type .four-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 0.8fr;
+  gap: 18px;
+  align-items: start;
+}
+
+/* Ensure inputs inside that row don't stretch excessively */
+.enrollment-container fieldset:first-of-type .four-cols .input-group input,
+.enrollment-container fieldset:first-of-type .four-cols .input-group select {
+  max-width: 320px;
+}
+
+/* Place Date of Birth, Gender, Nationality on one row inside Personal Information */
+.enrollment-container fieldset:first-of-type .three-cols {
+  display: grid;
+  grid-template-columns: 360px 300px 220px;
+  gap: 18px;
+  align-items: start;
+}
+.enrollment-container fieldset:first-of-type .three-cols .input-group {
+  margin-bottom: 0;
+}
