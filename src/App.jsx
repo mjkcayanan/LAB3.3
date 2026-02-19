@@ -1,13 +1,60 @@
 import './App.css'
 import { useState } from 'react';
 
+// 1. Data Mapping for Dynamic Selects
+const PROGRAM_DATA = {
+  CEA: [
+    { value: "BSARCH", label: "BS Architecture" },
+    { value: "BSCHEM", label: "BS Chemical Engineering" },
+    { value: "BSCIV", label: "BS Civil Engineering" },
+    { value: "BSCPE", label: "BS Computer Engineering" },
+    { value: "BSELEC", label: "BS Electrical Engineering" },
+    { value: "BSELE", label: "BS Electronics Engineering" },
+    { value: "BSIND", label: "BS Industrial Engineering" },
+    { value: "BSMECH", label: "BS Mechanical Engineering" },
+  ],
+  CCS: [
+    { value: "BSCS", label: "BS Computer Science" },
+    { value: "BSDS", label: "BS Data Science and Analytics" },
+    { value: "BSEMC", label: "BS Entertainment and Multimedia Computing" },
+    { value: "BSIT", label: "BS Information Technology" },
+  ],
+  CBE: [
+    { value: "BSACC", label: "BS Accountancy" },
+    { value: "BSAIS", label: "BS Accounting Information System" },
+    { value: "BSBA", label: "BS Business Administration" },
+    { value: "FM", label: "Financial Management" },
+    { value: "HRM", label: "Human Resource Management" },
+    { value: "LSC", label: "Logistics and Supply Chain Management" },
+    { value: "MM", label: "Marketing Management" },
+  ],
+  CA: [
+    { value: "BAENG", label: "Bachelor of Arts in English Language" },
+    { value: "BAPOL", label: "Bachelor of Arts in Political Science" },
+  ],
+  GRAD: [
+    { value: "DIT", label: "Doctor in Information Technology" },
+    { value: "DECCE", label: "Doctor of Engineering (Computer Engineering)" },
+    { value: "DPHCS", label: "Doctor of Philosophy in Computer Science" },
+    { value: "MIS", label: "Master in Information Systems" },
+    { value: "MIT", label: "Master in Information Technology" },
+    { value: "MLSC", label: "Master in Logistics and Supply Chain Management" },
+    { value: "MSCS", label: "Master of Science in Computer Science" },
+  ]
+};
+
 function App() {
-  // Create a state to store the selected program type
   const [selectedProgramType, setSelectedProgramType] = useState("");
+  const [selectedDept, setSelectedDept] = useState("");
 
   const handleProgramChange = (e) => {
     setSelectedProgramType(e.target.value);
   };
+
+  const handleDeptChange = (e) => {
+    setSelectedDept(e.target.value);
+  };
+
   return (
     <div className="enrollment-container">
       <header>
@@ -22,41 +69,19 @@ function App() {
           <div className="grid-row four-cols">
             <div className="input-group">
               <label>First Name*</label>
-              <input
-                type="text"
-                name="fname"
-                inputMode="text"
-                maxLength={50}
-                required
-              />
+              <input type="text" name="fname" required maxLength={50} />
             </div>
             <div className="input-group">
               <label>Middle Name</label>
-              <input
-                type="text"
-                name="mname"
-                inputMode="text"
-                maxLength={50}
-              />
+              <input type="text" name="mname" maxLength={50} />
             </div>
             <div className="input-group">
               <label>Last Name*</label>
-              <input
-                type="text"
-                name="lname"
-                inputMode="text"
-                maxLength={50}
-                required
-              />
+              <input type="text" name="lname" required maxLength={50} />
             </div>
             <div className="input-group">
               <label>Suffix</label>
-              <input
-                type="text"
-                name="suffix"
-                inputMode="text"
-                maxLength={10}
-              />
+              <input type="text" name="suffix" maxLength={10} />
             </div>
           </div>
 
@@ -83,7 +108,7 @@ function App() {
             </div>
           </div>
 
-            <div className="input-group">
+          <div className="input-group">
             <label>Religion</label>
             <div className="checkbox-group">
               <label><input type="checkbox" name="religion" value="Catholic" /> Catholic</label>
@@ -102,8 +127,7 @@ function App() {
                       else other.focus();
                     }
                   }}
-                />
-                Other
+                /> Other
               </label>
             </div>
             <input type="text" name="religion_other" placeholder="If Other, specify" disabled />
@@ -123,9 +147,7 @@ function App() {
               <input
                 type="tel"
                 name="mobile"
-                inputMode="numeric"
-                pattern="\d*"
-                maxLength={15}
+                maxLength={11}
                 onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, ''); }}
                 required
               />
@@ -133,17 +155,12 @@ function App() {
             <div className="input-group">
               <label>Landline</label>
               <input
-                type="text"
-                name="landline_number"
-                placeholder="Number"
-                inputMode="numeric"
-                pattern="\\d*"
-                maxLength={15}
-                onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\\D/g, ''); }}
+                type="tel"
+                name="landline"
+                onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/\D/g, ''); }}
               />
             </div>
           </div>
-
           <div className="input-group">
             <label>Complete Home Address*</label>
             <input type="text" name="address" placeholder="Street, Barangay, City, Province, Zip Code" required />
@@ -153,140 +170,69 @@ function App() {
         {/* SECTION 3: ACADEMIC HISTORY */}
         <fieldset>
           <legend>3. Academic History Section</legend>
-
-          {/* Grade School */}
           <div className="grid-row two-cols">
             <div className="input-group">
               <label>Grade School Name</label>
               <input type="text" name="gs_name" />
             </div>
             <div className="input-group">
-              <label>Year Graduated</label>
-              <input type="text" name="gs_year" />
+              <label>Year Graduated (GS)*</label>
+              <input type="text" name="gs_year" required maxLength={4} />
             </div>
           </div>
-          <div className="input-group">
-            <label>Grade School Address</label>
-            <input type="text" name="gs_address" />
-          </div>
 
-          {/* Junior High */}
           <div className="grid-row two-cols">
             <div className="input-group">
               <label>Junior High School Name</label>
               <input type="text" name="jhs_name" />
             </div>
             <div className="input-group">
-              <label>Year Graduated</label>
-              <input type="text" name="jhs_year" />
+              <label>Year Graduated (JHS)*</label>
+              <input type="text" name="jhs_year" required maxLength={4} />
             </div>
           </div>
-          <div className="input-group">
-            <label>Junior High School Address</label>
-            <input type="text" name="jhs_address" />
-          </div>
 
-          {/* Senior High */}
           <div className="grid-row three-cols">
             <div className="input-group">
               <label>Senior High School Name</label>
               <input type="text" name="shs_name" />
             </div>
             <div className="input-group">
-              <label>Year Graduated</label>
-              <input type="text" name="shs_year" />
+              <label>Year Graduated (SHS)*</label>
+              <input type="text" name="shs_year" required maxLength={4} />
             </div>
             <div className="input-group">
-              <label>Grade Average</label>
-              <input type="text" name="shs_grade_avg" />
+              <label>SHS Grade Average*</label>
+              <input type="number" name="shs_average" step="0.01" required />
             </div>
           </div>
-          <div className="input-group">
-            <label>Senior High School Address</label>
-            <input type="text" name="shs_address" />
-          </div>
-
         </fieldset>
 
         {/* SECTION 4: ENROLLMENT CHOICES */}
         <fieldset>
           <legend>4. Enrollment Choices</legend>
           
-          {/* Academic Level */}
-            <p>Academic Level*</p>
-            <div className="academic-level-container">
-              <label className="level-item">
-                <input type="radio" name="level" value="freshman" /> Freshman
-              </label>
-              
-              <label className="level-item">
-                <input type="radio" name="level" value="sophomore" /> Sophomore
-              </label>
-              
-              <label className="level-item">
-                <input type="radio" name="level" value="junior" /> Junior
-              </label>
-              
-              <label className="level-item">
-                <input type="radio" name="level" value="senior" /> Senior
-              </label>
-            </div>
+          <p>Academic Level*</p>
+          <div className="form-inline-group">
+            <label className="radio-option">
+              <input type="radio" name="academic_level" value="undergraduate" onChange={handleProgramChange} required /> Undergraduate
+            </label>
+            <label className="radio-option">
+              <input type="radio" name="academic_level" value="graduate" onChange={handleProgramChange} /> Graduate
+            </label>
+          </div>
 
-          {/* Semester */}
-            <p>Semester*</p>
-            <div className="semester-row">
-              <label className="radio-item">
-                <input type="radio" name="semester" value="1st" /> First Semester
-              </label>
-              
-              <label className="radio-item">
-                <input type="radio" name="semester" value="2nd" /> Second Semester
-              </label>
-              
-              <label className="radio-item">
-                <input type="radio" name="semester" value="summer" /> Summer
-              </label>
-            </div>
+          <p>Semester*</p>
+          <div className="semester-row">
+            <label className="radio-item"><input type="radio" name="semester" value="1st" required /> First Semester</label>
+            <label className="radio-item"><input type="radio" name="semester" value="2nd" /> Second Semester</label>
+            <label className="radio-item"><input type="radio" name="semester" value="summer" /> Summer</label>
+          </div>
 
-          {/* Campus */}
-              <p>Campus*</p>
-              <div className="form-inline-group">
-                <label className="radio-option">
-                  <input type="radio" name="campus" value="manila" /> Manila
-                </label>
-                
-                <label className="radio-option">
-                  <input type="radio" name="campus" value="quezon-city" /> Quezon City
-                </label>
-              </div>
-
-          {/* Program Type */}
-            <p>Program Type*</p>
-            <div className="form-inline-group">
-              <label className="radio-option">
-                <input 
-                  type="radio" 
-                  name="program" 
-                  value="undergraduate" 
-                  onChange={handleProgramChange} 
-                /> Undergraduate
-              </label>
-              
-              <label className="radio-option">
-                <input 
-                  type="radio" 
-                  name="program" 
-                  value="graduate" 
-                  onChange={handleProgramChange} 
-                /> Graduate
-              </label>
-            </div>
-
-          {/* College Department & Degree Program */}
           <div className="grid-row two-cols">
             <div className="input-group">
               <label>College Department*</label>
-              <select name="department" required>
+              <select name="department" value={selectedDept} onChange={handleDeptChange} required>
                 <option value="">Select Department</option>
                 <optgroup label="Undergraduate">
                   <option value="CEA">College of Engineering and Architecture</option>
@@ -299,56 +245,16 @@ function App() {
                 </optgroup>
               </select>
             </div>
+
             <div className="input-group">
               <label>Degree Program*</label>
-              <select name="program" required>
-                <option value="">Select Program</option>
-                <optgroup label="College of Engineering and Architecture">
-                  <option value="BSARCH">BS Architecture</option>
-                  <option value="BSCHEM">BS Chemical Engineering</option>
-                  <option value="BSCIV">BS Civil Engineering</option>
-                  <option value="BSCPE">BS Computer Engineering</option>
-                  <option value="BSELEC">BS Electrical Engineering</option>
-                  <option value="BSELE">BS Electronics Engineering</option>
-                  <option value="BSIND">BS Industrial Engineering</option>
-                  <option value="BSMECH">BS Mechanical Engineering</option>
-                </optgroup>
-                <optgroup label="College of Computer Studies">
-                  <option value="BSCS">BS Computer Science</option>
-                  <option value="BSDS">BS Data Science and Analytics</option>
-                  <option value="BSEMC">BS Entertainment and Multimedia Computing</option>
-                  <option value="BSIT">BS Information Technology</option>
-                </optgroup>
-                <optgroup label="College of Business Education">
-                  <option value="BSACC">BS Accountancy</option>
-                  <option value="BSAIS">BS Accounting Information System</option>
-                  <option value="BSBA">BS Business Administration</option>
-                  <option value="FM">Financial Management</option>
-                  <option value="HRM">Human Resource Management</option>
-                  <option value="LSC">Logistics and Supply Chain Management</option>
-                  <option value="MM">Marketing Management</option>
-                </optgroup>
-                <optgroup label="College of Arts">
-                  <option value="BAENG">Bachelor of Arts in English Language</option>
-                  <option value="BAPOL">Bachelor of Arts in Political Science</option>
-                </optgroup>
-                <optgroup label="Graduate - Doctorate">
-                  <option value="DIT">Doctor in Information Technology</option>
-                  <option value="DECCE">Doctor of Engineering with Specialization in Computer Engineering</option>
-                  <option value="DPHCS">Doctor of Philosophy in Computer Science</option>
-                </optgroup>
-                <optgroup label="Graduate - Master's">
-                  <option value="MIS">Master in Information Systems</option>
-                  <option value="MIT">Master in Information Technology</option>
-                  <option value="MLSC">Master in Logistics and Supply Chain Management</option>
-                  <option value="MESCE">Master of Engineering with Specialization in Civil Engineering</option>
-                  <option value="MESCE2">Master of Engineering with Specialization in Computer Engineering</option>
-                  <option value="MESEE">Master of Engineering with Specialization in Electrical Engineering</option>
-                  <option value="MESELE">Master of Engineering with Specialization in Electronics Engineering</option>
-                  <option value="MESIE">Master of Engineering with Specialization in Industrial Engineering</option>
-                  <option value="MESME">Master of Engineering with Specialization in Mechanical Engineering</option>
-                  <option value="MSCS">Master of Science in Computer Science</option>
-                </optgroup>
+              <select name="degree_program" required disabled={!selectedDept}>
+                <option value="">{selectedDept ? "Select Program" : "Select Department first"}</option>
+                {selectedDept && PROGRAM_DATA[selectedDept].map((prog) => (
+                  <option key={prog.value} value={prog.value}>
+                    {prog.label}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
@@ -360,4 +266,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
